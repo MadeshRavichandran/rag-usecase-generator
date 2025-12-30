@@ -1,92 +1,68 @@
 {
   "testCases": [
     {
-      "name": "Valid signup",
-      "request": {
-        "method": "POST",
-        "url": "/api/signup",
-        "body": {
-          "email": "test@example.com",
-          "password": "password123"
+      "testCaseName": "Verify Flight Search Page Title",
+      "testSteps": [
+        {
+          "step": "Navigate to the flight booking search page",
+          "expectedResult": "The page title should be 'Compare and book cheap flights with ease'"
         }
-      },
-      "expectedResponse": {
-        "statusCode": 201,
-        "description": "User created successfully"
-      }
+      ]
     },
     {
-      "name": "Invalid email",
-      "request": {
-        "method": "POST",
-        "url": "/api/signup",
-        "body": {
-          "email": "invalid_email",
-          "password": "password123"
+      "testCaseName": "Verify Flight Search Form",
+      "testSteps": [
+        {
+          "step": "Verify the 'From' dropdown is populated with destinations",
+          "expectedResult": "The 'From' dropdown should contain 'MAA Chennai International Airport' as an option"
+        },
+        {
+          "step": "Verify the 'To' dropdown is populated with destinations",
+          "expectedResult": "The 'To' dropdown should contain 'Latvia', 'Yekaterinburg', 'North Sea', etc. as options"
+        },
+        {
+          "step": "Verify the 'Travel dates' field is populated with the current date",
+          "expectedResult": "The 'Travel dates' field should be populated with the current date"
+        },
+        {
+          "step": "Verify the 'Travelers' field is populated with the default value",
+          "expectedResult": "The 'Travelers' field should be populated with '1 adult' as the default value"
         }
-      },
-      "expectedResponse": {
-        "statusCode": 400,
-        "description": "Validation error"
-      }
+      ]
     },
     {
-      "name": "Empty password",
-      "request": {
-        "method": "POST",
-        "url": "/api/signup",
-        "body": {
-          "email": "test@example.com",
-          "password": ""
+      "testCaseName": "Verify Flight Search Results",
+      "testSteps": [
+        {
+          "step": "Enter 'MAA Chennai International Airport' in the 'From' field",
+          "expectedResult": "The page should display a list of flights from Chennai International Airport"
+        },
+        {
+          "step": "Select 'Latvia' as the destination in the 'To' field",
+          "expectedResult": "The page should display a list of flights from Chennai International Airport to Latvia"
+        },
+        {
+          "step": "Select 'Sat, Jan 24, 2026' as the departure date",
+          "expectedResult": "The page should display a list of flights from Chennai International Airport to Latvia on Sat, Jan 24, 2026"
+        },
+        {
+          "step": "Select 'Economy' as the class of travel",
+          "expectedResult": "The page should display a list of economy flights from Chennai International Airport to Latvia on Sat, Jan 24, 2026"
         }
-      },
-      "expectedResponse": {
-        "statusCode": 400,
-        "description": "Validation error"
-      }
+      ]
     },
     {
-      "name": "Existing email",
-      "request": {
-        "method": "POST",
-        "url": "/api/signup",
-        "body": {
-          "email": "test@example.com",
-          "password": "password123"
+      "testCaseName": "Verify Flight Search Filters",
+      "testSteps": [
+        {
+          "step": "Select 'Direct flights only' as the flight type",
+          "expectedResult": "The page should display only direct flights from Chennai International Airport to Latvia on Sat, Jan 24, 2026"
+        },
+        {
+          "step": "Select 'One-way' as the travel type",
+          "expectedResult": "The page should display one-way flights from Chennai International Airport to Latvia on Sat, Jan 24, 2026"
         }
-      },
-      "expectedResponse": {
-        "statusCode": 409,
-        "description": "Email already exists"
-      }
-    },
-    {
-      "name": "Missing email",
-      "request": {
-        "method": "POST",
-        "url": "/api/signup",
-        "body": {
-          "password": "password123"
-        }
-      },
-      "expectedResponse": {
-        "statusCode": 400,
-        "description": "Validation error"
-      }
-    },
-    {
-      "name": "Missing password",
-      "request": {
-        "method": "POST",
-        "url": "/api/signup",
-        "body": {
-          "email": "test@example.com"
-        }
-      },
-      "expectedResponse": {
-        "statusCode": 400,
-        "description": "Validation error"
-      }
+      ]
     }
   ]
 }
