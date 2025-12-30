@@ -1,65 +1,92 @@
 {
-  "use_cases": [
+  "testCases": [
     {
-      "id": "UC-001",
-      "name": "Successful Signup with Email and Password",
-      "description": "User signs up with a valid email and password",
-      "preconditions": [
-        "User has a valid email address",
-        "User has a valid password"
-      ],
-      "triggers": [
-        "User initiates signup process"
-      ],
-      "actions": [
-        "User enters email and password",
-        "System validates email and password",
-        "System creates new user account"
-      ],
-      "postconditions": [
-        "User account is created successfully",
-        "User is logged in"
-      ]
+      "name": "Valid signup",
+      "request": {
+        "method": "POST",
+        "url": "/api/signup",
+        "body": {
+          "email": "test@example.com",
+          "password": "password123"
+        }
+      },
+      "expectedResponse": {
+        "statusCode": 201,
+        "description": "User created successfully"
+      }
     },
     {
-      "id": "UC-002",
-      "name": "Failed Signup with Invalid Email",
-      "description": "User signs up with an invalid email",
-      "preconditions": [
-        "User has an invalid email address"
-      ],
-      "triggers": [
-        "User initiates signup process"
-      ],
-      "actions": [
-        "User enters email and password",
-        "System validates email and password",
-        "System displays error message"
-      ],
-      "postconditions": [
-        "Error message is displayed to user",
-        "User account is not created"
-      ]
+      "name": "Invalid email",
+      "request": {
+        "method": "POST",
+        "url": "/api/signup",
+        "body": {
+          "email": "invalid_email",
+          "password": "password123"
+        }
+      },
+      "expectedResponse": {
+        "statusCode": 400,
+        "description": "Validation error"
+      }
     },
     {
-      "id": "UC-003",
-      "name": "Failed Signup with Weak Password",
-      "description": "User signs up with a weak password",
-      "preconditions": [
-        "User has a weak password"
-      ],
-      "triggers": [
-        "User initiates signup process"
-      ],
-      "actions": [
-        "User enters email and password",
-        "System validates email and password",
-        "System displays error message"
-      ],
-      "postconditions": [
-        "Error message is displayed to user",
-        "User account is not created"
-      ]
+      "name": "Empty password",
+      "request": {
+        "method": "POST",
+        "url": "/api/signup",
+        "body": {
+          "email": "test@example.com",
+          "password": ""
+        }
+      },
+      "expectedResponse": {
+        "statusCode": 400,
+        "description": "Validation error"
+      }
+    },
+    {
+      "name": "Existing email",
+      "request": {
+        "method": "POST",
+        "url": "/api/signup",
+        "body": {
+          "email": "test@example.com",
+          "password": "password123"
+        }
+      },
+      "expectedResponse": {
+        "statusCode": 409,
+        "description": "Email already exists"
+      }
+    },
+    {
+      "name": "Missing email",
+      "request": {
+        "method": "POST",
+        "url": "/api/signup",
+        "body": {
+          "password": "password123"
+        }
+      },
+      "expectedResponse": {
+        "statusCode": 400,
+        "description": "Validation error"
+      }
+    },
+    {
+      "name": "Missing password",
+      "request": {
+        "method": "POST",
+        "url": "/api/signup",
+        "body": {
+          "email": "test@example.com"
+        }
+      },
+      "expectedResponse": {
+        "statusCode": 400,
+        "description": "Validation error"
+      }
     }
   ]
 }

@@ -4,6 +4,7 @@ import os
 import tempfile
 
 from ingestion.loader import load_text_from_file
+from ingestion.ocr import extract_text_from_image
 from ingestion.chunker import chunk_text
 from retrieval.vector_store import VectorStore
 from retrieval.keyword_store import KeywordStore
@@ -32,8 +33,8 @@ confidence_threshold = st.sidebar.slider(
 
 st.subheader("📂 Upload Input Files")
 uploaded_files = st.file_uploader(
-    "Upload PRD / Notes (TXT, MD, PDF)",
-    type=["txt", "md", "pdf"],
+    "Upload input files (PRD, API Spec, UI, Notes)",
+    type=["txt", "md", "pdf", "yaml", "yml", "png", "jpg", "jpeg"],
     accept_multiple_files=True
 )
 
@@ -58,9 +59,17 @@ if generate_btn:
                 with open(path, "wb") as f:
                     f.write(file.read())
 
-                text = load_text_from_file(path)
-                chunks = chunk_text(text)
-                all_chunks.extend(chunks)
+                ext = file.name.lower().split(".")[-1]
+
+                if ext in ["png", "jpg", "jpeg"]:
+                    text = extract_text_from_image(path)
+                else:
+                    text = load_text_from_file(path)
+
+                if text and text.strip():
+                    chunks = chunk_text(text)
+                    chunks = [c for c in chunks if c["text"].strip()]
+                    all_chunks.extend(chunks)
 
         vector_store = VectorStore()
         keyword_store = KeywordStore()

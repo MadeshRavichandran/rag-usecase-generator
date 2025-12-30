@@ -32,9 +32,8 @@ Saved Output + Debug View
 
 
 ## Supported Input Files
-- .txt, .md
-- .pdf
-- Extensible for .docx and images via OCR
+- .txt, .md,.yaml
+- .pdf,.png,.img
 
 All files are parsed, chunked, embedded, and indexed locally.
 
