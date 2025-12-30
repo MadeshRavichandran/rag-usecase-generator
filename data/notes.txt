@@ -1,0 +1,2 @@
+Signup does not support phone number login.
+Captcha is not implemented yet.

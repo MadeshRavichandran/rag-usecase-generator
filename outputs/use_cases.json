@@ -1,0 +1,65 @@
+{
+  "use_cases": [
+    {
+      "id": "UC-001",
+      "name": "Successful Signup with Email and Password",
+      "description": "User signs up with a valid email and password",
+      "preconditions": [
+        "User has a valid email address",
+        "User has a valid password"
+      ],
+      "triggers": [
+        "User initiates signup process"
+      ],
+      "actions": [
+        "User enters email and password",
+        "System validates email and password",
+        "System creates new user account"
+      ],
+      "postconditions": [
+        "User account is created successfully",
+        "User is logged in"
+      ]
+    },
+    {
+      "id": "UC-002",
+      "name": "Failed Signup with Invalid Email",
+      "description": "User signs up with an invalid email",
+      "preconditions": [
+        "User has an invalid email address"
+      ],
+      "triggers": [
+        "User initiates signup process"
+      ],
+      "actions": [
+        "User enters email and password",
+        "System validates email and password",
+        "System displays error message"
+      ],
+      "postconditions": [
+        "Error message is displayed to user",
+        "User account is not created"
+      ]
+    },
+    {
+      "id": "UC-003",
+      "name": "Failed Signup with Weak Password",
+      "description": "User signs up with a weak password",
+      "preconditions": [
+        "User has a weak password"
+      ],
+      "triggers": [
+        "User initiates signup process"
+      ],
+      "actions": [
+        "User enters email and password",
+        "System validates email and password",
+        "System displays error message"
+      ],
+      "postconditions": [
+        "Error message is displayed to user",
+        "User account is not created"
+      ]
+    }
+  ]
+}

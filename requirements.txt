@@ -1,0 +1,7 @@
+faiss-cpu
+sentence-transformers
+pdfplumber
+python-docx
+pytesseract
+Pillow
+openai

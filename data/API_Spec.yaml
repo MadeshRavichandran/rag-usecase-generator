@@ -1,0 +1,12 @@
+POST /api/signup
+request:
+  body:
+    email: string
+    password: string
+responses:
+  201:
+    description: User created successfully
+  400:
+    description: Validation error
+  409:
+    description: Email already exists
